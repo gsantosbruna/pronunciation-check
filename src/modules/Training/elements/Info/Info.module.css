@@ -1,0 +1,49 @@
+
+.container {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.16);
+  padding: 16px;
+  width: 80%;
+  border-radius: 10px;
+  backdrop-filter: blur(6px);
+}
+
+.container__upper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container__upper svg path {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.container__upper svg {
+  width: 24px;
+  height: 24px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.container__title,
+.container__description,
+.container__tags {
+  color: #fff;
+  margin: 8px;
+  font-size: 12px;
+}
+
+.container__title {
+  font-size: 16px;
+}
+
+.container__tags {
+  margin-top: 16px;
+  width: fit-content;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 6px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}

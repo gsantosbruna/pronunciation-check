@@ -1,0 +1,100 @@
+"use client";
+import * as React from "react";
+import { useCourseContext } from "@/shared/courses/context";
+import { useMemo } from "react";
+import styles from "./Start.module.css";
+import PhraseCard from "@/modules/Training";
+import { useTheme } from "@mui/material/styles";
+import MobileStepper from "@mui/material/MobileStepper";
+import Button from "@mui/material/Button";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+
+export default function StartTraining({ params }: { params: { id: string } }) {
+  const { courses } = useCourseContext();
+
+  const course = useMemo(
+    () => courses.find((course) => course.id === Number(params.id)),
+    [courses, params.id]
+  );
+
+  const lang = useMemo(() => {
+    switch (course?.tag) {
+      case "French":
+        return "fr-FR";
+      case "English":
+        return "en-US";
+      case "Spanish":
+        return "es-ES";
+      case "Portuguese":
+        return "pt-BR";
+      default:
+        return null;
+    }
+  }, [course]);
+
+  const theme = useTheme();
+  const [activeStep, setActiveStep] = React.useState(0);
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  return (
+    <div className={styles.content}>
+      <div>
+        <MobileStepper
+          variant="dots"
+          steps={course?.content.length || 0}
+          elevation={3}
+          sx={{ borderRadius: "3px" }}
+          position="static"
+          activeStep={activeStep}
+          nextButton={
+            <Button
+              size="small"
+              onClick={handleNext}
+              disabled={activeStep === course!.content.length - 1}
+            >
+              Next
+              {theme.direction === "rtl" ? (
+                <KeyboardArrowLeft />
+              ) : (
+                <KeyboardArrowRight />
+              )}
+            </Button>
+          }
+          backButton={
+            <Button
+              size="small"
+              onClick={handleBack}
+              disabled={activeStep === 0}
+            >
+              {theme.direction === "rtl" ? (
+                <KeyboardArrowRight />
+              ) : (
+                <KeyboardArrowLeft />
+              )}
+              Previous
+            </Button>
+          }
+        />
+      </div>
+      <div className={styles.content__card}>
+        {course && (
+          <div className={styles.container}>
+            <PhraseCard
+              key={`${course.content[activeStep]}-${activeStep}`}
+              text={course.content[activeStep]}
+              lang={lang || "en-US"}
+            />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

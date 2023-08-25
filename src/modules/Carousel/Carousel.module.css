@@ -1,0 +1,20 @@
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+  gap: 16px;
+}
+.embla__slide {
+  flex: 1 0 auto;
+  min-width: 0;
+}
+.embla__slide:first-child {
+  margin-left: 12px;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--ternary-color);
+}

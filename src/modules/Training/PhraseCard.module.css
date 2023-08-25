@@ -1,0 +1,37 @@
+.bottom div svg path {
+  fill: var(--ternary-color);
+}
+
+.bottom div svg {
+  width: 18px;
+}
+
+.bottom {
+  opacity: 0.8;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  padding-top: 0;
+}
+.bottom__record {
+  display: flex;
+  align-items: center;
+}
+
+.bottom__record p {
+  margin-left: 6px;
+  cursor: pointer;
+}
+
+.bottom__record svg,
+.listen {
+  cursor: pointer;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 80%;
+}

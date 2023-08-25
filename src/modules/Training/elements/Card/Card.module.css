@@ -1,0 +1,51 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.phraseCard {
+  background-color: var(--background-training);
+  font-size: 0.8rem;
+  margin: 16px 16px;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.phraseCard__text {
+  margin: 0;
+}
+
+.listen {
+  cursor: pointer;
+  margin-right: 16px;
+}
+
+.listen svg path {
+  fill: var(--ternary-color);
+}
+
+.listen:hover svg path {
+  fill: black;
+}
+
+.matched {
+  text-decoration: underline;
+  text-decoration-color: green;
+  text-decoration-thickness: 2px;
+}
+
+.missing {
+  text-decoration: underline;
+  text-decoration-color: red;
+  text-decoration-thickness: 2px;
+}
+
+.almost {
+  text-decoration: underline;
+  text-decoration-color: orange;
+  text-decoration-thickness: 2px;
+}

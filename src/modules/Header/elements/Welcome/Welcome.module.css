@@ -1,0 +1,14 @@
+.container {
+  margin: auto 16px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--ternary-color);
+}
+
+.welcome {
+  font-size: 24px;
+  font-weight: 700;
+}

@@ -1,0 +1,17 @@
+.search {
+  width: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: 3px solid var(--ternary-color);
+  margin-bottom: 16px;
+  padding: 10px;
+  border-radius: 10px;
+  opacity: 0.2;
+}
+
+.input {
+  margin-left: 16px;
+  border: none;
+  width: 100%;
+}

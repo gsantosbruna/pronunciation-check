@@ -1,0 +1,6 @@
+.icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 100%;
+  border: 3px solid var(--primary-color);
+}

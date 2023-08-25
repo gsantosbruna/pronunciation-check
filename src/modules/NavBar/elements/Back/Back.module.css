@@ -1,0 +1,7 @@
+.backButton {
+  cursor: pointer;
+}
+
+.backButton svg path {
+  fill: white;
+}

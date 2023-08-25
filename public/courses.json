@@ -1,0 +1,232 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "title": "French Beginner",
+      "description": "This is a beginner training for French pronunciation",
+      "tag": "French",
+      "image": "/images/1.jpg",
+      "content": [
+        "Bonjour, je m'appelle Marie.",
+        "Il fait beau aujourd'hui.",
+        "J'aime manger des croissants.",
+        "La Tour Eiffel est magnifique.",
+        "Mon ami s'appelle Pierre.",
+        "Je vais au parc demain.",
+        "J'adore le fromage français.",
+        "J'habite à Marseille.",
+        "Les macarons sont délicieux.",
+        "La plage est près d'ici."
+      ]
+    },
+    {
+      "id": 2,
+      "title": "French Intermediate",
+      "description": "This is an intermediate training for French pronunciation",
+      "tag": "French",
+      "image": "/images/2.jpg",
+      "content": [
+        "Rendez-vous au Champs-Élysées.",
+        "L'architecture gothique est impressionnante.",
+        "Les œuvres de Monet sont célèbres.",
+        "Je préfère le vin rouge au vin blanc.",
+        "La Seine traverse Paris.",
+        "Les parfums français sont renommés.",
+        "J'ai visité le château de Versailles.",
+        "J'apprécie la cuisine provençale.",
+        "Le cinéma français est diversifié.",
+        "Les escargots sont une spécialité."
+      ]
+    },
+    {
+      "id": 3,
+      "title": "French Advanced",
+      "description": "This is an advanced training for French pronunciation",
+      "tag": "French",
+      "image": "/images/3.jpg",
+      "content": [
+        "L'art contemporain français est complexe.",
+        "La prononciation des mots difficiles en français.",
+        "La philosophie existentialiste est profonde.",
+        "La poésie de Baudelaire est obscure.",
+        "Le débat politique en France est animé.",
+        "La culture française est pluriculturelle.",
+        "L'histoire de la Révolution est compliquée.",
+        "La littérature française est riche en symbolisme.",
+        "Les dialectes régionaux sont variés.",
+        "La phonétique française demande de la précision."
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Spanish Beginner",
+      "description": "This is a beginner training for Spanish pronunciation",
+      "tag": "Spanish",
+      "image": "/images/4.jpg",
+      "content": [
+        "¡Hola, cómo estás?",
+        "Me gusta comer tapas.",
+        "El sol brilla en España.",
+        "Tengo una familia grande.",
+        "Hablamos español en casa.",
+        "La paella es deliciosa.",
+        "Vamos a la playa el fin de semana.",
+        "La música latina es alegre.",
+        "Mi amigo se llama Carlos.",
+        "Estudio español en la escuela."
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Spanish Intermediate",
+      "description": "This is an intermediate training for Spanish pronunciation",
+      "tag": "Spanish",
+      "image": "/images/5.jpg",
+      "content": [
+        "He visitado la Alhambra en Granada.",
+        "Bailar salsa requiere ritmo.",
+        "La historia de América Latina es fascinante.",
+        "El cine español tiene películas destacadas.",
+        "He probado el ceviche en Perú.",
+        "La arquitectura colonial es única.",
+        "Hablo español con fluidez.",
+        "La literatura de García Márquez es profunda.",
+        "La música ranchera es emotiva.",
+        "La pronunciación de las 'rr' es un reto."
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Spanish Advanced",
+      "description": "This is an advanced training for Spanish pronunciation",
+      "tag": "Spanish",
+      "image": "/images/6.jpg",
+      "content": [
+        "El surrealismo en el arte es intrigante.",
+        "Los movimientos revolucionarios son complejos.",
+        "Las políticas de América Latina varían.",
+        "Las obras de Borges son metafísicas.",
+        "Estudié el realismo mágico en profundidad.",
+        "Participé en proyectos de ayuda humanitaria.",
+        "La poesía de Neruda es apasionada.",
+        "Exploré la selva amazónica en una expedición.",
+        "Entendí las lenguas indígenas en México.",
+        "Traduje textos complejos al español."
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Portuguese Beginner",
+      "description": "This is a beginner training for Portuguese pronunciation",
+      "tag": "Portuguese",
+      "image": "/images/1.jpg",
+      "content": [
+        "Olá, como vai?",
+        "Gosto de comer pão de queijo.",
+        "O sol brilha no Brasil.",
+        "Tenho uma família grande.",
+        "Aprendo português na escola.",
+        "A feijoada é deliciosa.",
+        "Vamos à praia no fim de semana.",
+        "A música brasileira é animada.",
+        "Meu amigo se chama João.",
+        "Estudo português em casa."
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Portuguese Intermediate",
+      "description": "This is an intermediate training for Portuguese pronunciation",
+      "tag": "Portuguese",
+      "image": "/images/2.jpg",
+      "content": [
+        "Eu visitei Lisboa e Porto.",
+        "Dançar samba requer ginga.",
+        "A história do Brasil é fascinante.",
+        "O cinema brasileiro produz filmes diversos.",
+        "Provei a moqueca na Bahia.",
+        "A arquitetura colonial é única.",
+        "Falo português com fluência.",
+        "A poesia de Drummond é profunda.",
+        "A música bossa nova é suave.",
+        "A pronúncia das vogais é um desafio."
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Portuguese Advanced",
+      "description": "This is an advanced training for Portuguese pronunciation",
+      "tag": "Portuguese",
+      "image": "/images/3.jpg",
+      "content": [
+        "A literatura de Machado de Assis é complexa.",
+        "As questões políticas no Brasil são variadas.",
+        "Visitei a Floresta Amazônica em uma expedição.",
+        "A música de Caetano Veloso é inovadora.",
+        "Traduzi obras literárias complexas para o português.",
+        "Participei de projetos de preservação da Amazônia.",
+        "A cultura indígena brasileira é diversificada.",
+        "Entendi a influência africana na cultura brasileira.",
+        "Explorei as praias do Nordeste do Brasil.",
+        "A pronúncia das consoantes é desafiadora."
+      ]
+    },
+    {
+      "id": 10,
+      "title": "English Beginner",
+      "description": "This is a beginner training for English pronunciation",
+      "tag": "English",
+      "image": "/images/4.jpg",
+      "content": [
+        "Hello, how are you?",
+        "I like to eat pizza.",
+        "The weather is nice today.",
+        "I have a dog named Max.",
+        "We watch movies on weekends.",
+        "I'm learning English in school.",
+        "I can count to ten in English.",
+        "I want to visit London someday.",
+        "I enjoy listening to pop music.",
+        "My friend's name is Emily."
+      ]
+    },
+    {
+      "id": 11,
+      "title": "English Intermediate",
+      "description": "This is an intermediate training for English pronunciation",
+      "tag": "English",
+      "image": "/images/5.jpg",
+      "content": [
+        "I've traveled to New York City.",
+        "I enjoy hiking in the mountains.",
+        "I'm planning a trip to Japan.",
+        "I've taken English classes online.",
+        "I like to read science fiction novels.",
+        "I've watched documentaries about space.",
+        "I can have basic conversations in English.",
+        "I want to improve my pronunciation.",
+        "I'm interested in cultural diversity.",
+        "I've visited historical landmarks."
+      ]
+    },
+    {
+      "id": 12,
+      "title": "English Advanced",
+      "description": "This is an advanced training for English pronunciation",
+      "tag": "English",
+      "image": "/images/6.jpg",
+      "content": [
+        "Shakespeare's sonnets are intricate.",
+        "I've conducted research in English.",
+        "I've published articles in academic journals.",
+        "I've given presentations at international conferences.",
+        "I'm fluent in English, French, and Spanish.",
+        "I've analyzed English literature extensively.",
+        "I've translated novels into English.",
+        "I'm pursuing a PhD in English literature.",
+        "I enjoy discussing linguistics and phonetics.",
+        "I've taught English at the university level."
+      ]
+    }
+  ]
+}

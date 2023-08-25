@@ -1,0 +1,37 @@
+.tags {
+  width: 69px;
+  color: #d2d2d2;
+  padding: 10px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 400;
+  margin: 0;
+  border-radius: 10px;
+}
+.tags:hover {
+  color: black;
+  background: rgba(224, 224, 224, 0.46);
+  cursor: pointer;
+}
+.active {
+  color: black;
+  background: rgba(224, 224, 224, 0.46);
+}
+.embla {
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+.embla__container {
+  display: flex;
+  gap: 10px;
+}
+.embla__slide {
+  flex: 1 0 auto;
+  min-width: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .embla__slide {
+    flex: 0 0 auto;
+  }
+}
