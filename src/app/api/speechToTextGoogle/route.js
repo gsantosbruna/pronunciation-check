@@ -2,7 +2,15 @@
 import { SpeechClient } from "@google-cloud/speech";
 import { NextResponse } from "next/server";
 
-const client = new SpeechClient();
+const credential = JSON.parse(
+  Buffer.from(process.env.GOOGLE_APPLICATION_CREDENTIALS, "base64")
+    .toString()
+    .replace(/\n/g, "")
+);
+
+const client = new SpeechClient({
+  credentials: credential,
+});
 
 export async function POST(request) {
   const req = await request.json();

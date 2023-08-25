@@ -1,7 +1,7 @@
-const synth = window.speechSynthesis;
+let syth: SpeechSynthesis | null = null;
 
-if (!synth) {
-  alert("Aw... your browser does not support Speech Synthesis");
+if (typeof window !== "undefined") {
+  syth = window.speechSynthesis;
 }
 
 export const speak = (textValue: string, lang: string) => {
