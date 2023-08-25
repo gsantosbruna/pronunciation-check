@@ -8,6 +8,8 @@ const credential = JSON.parse(
     .replace(/\n/g, "")
 );
 
+console.log({ credential });
+
 const client = new SpeechClient({
   credentials: credential,
 });
