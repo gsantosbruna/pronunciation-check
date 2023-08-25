@@ -9,7 +9,7 @@
   justify-content: space-between;
 }
 .embla__slide {
-  flex: 1 0 auto;
+  /* flex: 1 0 auto; */
   min-width: 0;
 }
 /* .embla__slide:first-child {
