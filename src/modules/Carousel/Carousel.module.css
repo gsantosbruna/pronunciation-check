@@ -4,14 +4,17 @@
 .embla__container {
   display: flex;
   gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
 }
 .embla__slide {
   flex: 1 0 auto;
   min-width: 0;
 }
-.embla__slide:first-child {
+/* .embla__slide:first-child {
   margin-left: 12px;
-}
+} */
 
 .title {
   font-weight: 400;

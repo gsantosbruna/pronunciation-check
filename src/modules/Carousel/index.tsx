@@ -14,16 +14,16 @@ interface EmblaCarouselProps {
 export const EmblaCarousel = ({ title, Card }: EmblaCarouselProps) => {
   const { courses } = useCourseContext();
   const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
-  const [emblaRef] = useEmblaCarousel({
-    loop: true,
-    align: "start",
-  });
+  // const [emblaRef] = useEmblaCarousel({
+  //   loop: true,
+  //   align: "start",
+  // });
 
   return (
     <>
       <div>
         <h3 className={styles.title}>{title}</h3>
-        <div className={styles.embla} ref={emblaRef}>
+        <div className={styles.embla} >
           <div ref={parent} className={styles.embla__container}>
             {courses.map((course: Course) => (
               <div className={styles.embla__slide} key={course.id}>
