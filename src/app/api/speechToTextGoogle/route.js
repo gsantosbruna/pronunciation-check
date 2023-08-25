@@ -43,7 +43,7 @@ async function convertAudioToText(audioData, lang) {
       content: audioData,
     },
     config: {
-      encoding: "WEBM_OPUS",
+      encoding: "ENCODING_UNSPECIFIED",
       languageCode: lang,
       enableWordTimeOffsets: true,
       enableWordConfidence: true,
