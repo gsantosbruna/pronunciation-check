@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 console.log("hello", process.env.GOOGLE_APPLICATION_CREDENTIALS);
 const credential = JSON.parse(
   // Buffer.from(process.env.GOOGLE_APPLICATION_CREDENTIALS, "base64")
-  process.env.GOOGLE_APPLICATION_CREDENTIALS.toString().replace(/\n/g, "")
+  process.env.GOOGLE_APPLICATION_CREDENTIALS
 );
 
 const client = new SpeechClient({
