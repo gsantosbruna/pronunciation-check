@@ -1,14 +1,12 @@
 // Import necessary libraries
 import { SpeechClient } from "@google-cloud/speech";
 import { NextResponse } from "next/server";
-
+console.log({ credential });
 const credential = JSON.parse(
   Buffer.from(process.env.GOOGLE_APPLICATION_CREDENTIALS, "base64")
     .toString()
     .replace(/\n/g, "")
 );
-
-console.log({ credential });
 
 const client = new SpeechClient({
   credentials: credential,
