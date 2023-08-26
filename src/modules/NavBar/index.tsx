@@ -12,7 +12,7 @@ export default function NavBar() {
     <div className={styles.navBar}>
       {/* {pathname === "/" ? <Menu /> : <Back />} */}
       {/* {pathname === "/" ? <ProfileIcon /> : null} */}
-      {pathname.includes("training") ? <Back /> : null}
+      {pathname?.includes("training") ? <Back /> : null}
     </div>
   );
 }

@@ -37,26 +37,6 @@ export async function initializeAudioRecorder(
         chunks.current = [];
       };
 
-      const handleAudio = (stream: MediaStream) => {
-        const audioContext = new AudioContext({ sampleRate: 48000 });
-        const input = audioContext.createMediaStreamSource(stream);
-        const workletNode = new AudioWorkletNode!(audioContext, "proc", {
-          numberOfInputs: 1,
-          numberOfOutputs: 1,
-          outputChannelCount: [1],
-        });
-        input.connect(workletNode);
-        workletNode.connect(audioContext.destination);
-        workletNode.port.onmessage = (e) => {
-          console.log(e.data);
-          const float32Audio = e.data;
-          const int16Audio = convertFloat32ToInt16(float32Audio);
-          console.log(int16Audio);
-          // chunks.current.push(new Blob([int16Audio]));
-        };
-      };
-      // navigator.mediaDevices.getUserMedia(constraints).then(handleAudio);
-
       newMediaRecorder.ondataavailable = (e) => {
         chunks.current.push(e.data);
       };
@@ -71,17 +51,8 @@ export async function initializeAudioRecorder(
 
           const audioUrl = URL.createObjectURL(audioBlob);
           const audio = new Audio(audioUrl);
-          // download audio to play
-          // const a = document.createElement("a");
-          // a.style.display = "none";
-          // a.href = audioUrl;
-          // a.download = `audio.${
-          //   newMediaRecorder.mimeType.split("/")[1].split(";")[0]
-          // }`;
-          // document.body.appendChild(a);
-          // a.click();
-
           // audio.play();
+
           const reader = new FileReader();
           reader.readAsDataURL(audioBlob);
           reader.onloadend = async function () {
