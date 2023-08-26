@@ -1,6 +1,5 @@
 // audioRecorder.ts
 import { Word } from "@/shared/speechToText/interfaces";
-import { AudioContext, AudioWorkletNode } from "standardized-audio-context";
 
 function convertFloat32ToInt16(buffer: Float32Array): Int16Array {
   let l = buffer.length;
