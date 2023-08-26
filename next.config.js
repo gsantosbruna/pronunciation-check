@@ -1,41 +1,45 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
-
-// module.exports = nextConfig
-
-// Injected content via Sentry wizard below
-
 const { withSentryConfig } = require("@sentry/nextjs");
+const webpack = require("webpack");
 
-module.exports = withSentryConfig(
-  module.exports,
-  {
-    // For all available options, see:
-    // https://github.com/getsentry/sentry-webpack-plugin#options
-
-    // Suppresses source map uploading logs during build
-    silent: true,
-
-    org: "student-6aadc151d",
-    project: "javascript-nextjs",
+const nextConfig = {
+  reactStrictMode: true,
+  async headers() {
+    return [
+      {
+        source: "/",
+        headers: [
+          {
+            key: "Cross-Origin-Embedder-Policy",
+            value: "require-corp",
+          },
+          {
+            key: "Cross-Origin-Opener-Policy",
+            value: "same-origin",
+          },
+        ],
+      },
+    ];
   },
-  {
-    // For all available options, see:
-    // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
+};
 
-    // Upload a larger set of source maps for prettier stack traces (increases build time)
-    widenClientFileUpload: true,
+const sentryConfig = {
+  // For all available options, see:
+  // https://github.com/getsentry/sentry-webpack-plugin#options
 
-    // Transpiles SDK to be compatible with IE11 (increases bundle size)
-    transpileClientSDK: true,
+  // Suppresses source map uploading logs during build
+  silent: true,
 
-    // Routes browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers (increases server load)
-    tunnelRoute: "/monitoring",
+  org: "student-6aadc151d",
+  project: "javascript-nextjs",
+};
 
-    // Hides source maps from generated client bundles
-    hideSourceMaps: true,
+const webpackConfig = {
+  // Add the DefinePlugin to set FLUENTFFMPEG_COV to false
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env.FLUENTFFMPEG_COV": JSON.stringify(false),
+    }),
+  ],
+};
 
-    // Automatically tree-shake Sentry logger statements to reduce bundle size
-    disableLogger: true,
-  }
-);
+module.exports = withSentryConfig(nextConfig, sentryConfig, webpackConfig);

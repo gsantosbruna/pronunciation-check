@@ -83,6 +83,16 @@ export default function PhraseCard({
 
   const [parent, _] = useAutoAnimate(/* optional config */);
 
+  const downloadRecording = () => {
+    const url = "output.wav";
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "output.wav";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div
       style={{

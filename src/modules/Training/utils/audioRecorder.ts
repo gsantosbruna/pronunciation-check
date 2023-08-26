@@ -1,13 +1,21 @@
+import { mime } from "mime";
 // audioRecorder.ts
 import { Word } from "@/shared/speechToText/interfaces";
+import { FFmpeg } from "@ffmpeg/ffmpeg";
+import { fetchFile, toBlobURL } from "@ffmpeg/util";
 
-function convertFloat32ToInt16(buffer: Float32Array): Int16Array {
-  let l = buffer.length;
-  const buf = new Int16Array(l);
-  while (l--) {
-    buf[l] = Math.min(1, buffer[l]) * 0x7fff;
-  }
-  return buf;
+async function convertToLinearWav(inputpath: string) {
+  const ffmpeg = new FFmpeg();
+  const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.2/dist/umd";
+  await ffmpeg.load({
+    coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
+    wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm"),
+  });
+  await ffmpeg.writeFile("input.mp4", await fetchFile(inputpath));
+  await ffmpeg.exec(["-i", "input.mp4", "output.wav"]);
+  const data = (await ffmpeg.readFile("output.wav")) as any;
+  const blob = new Blob([data.buffer], { type: "audio/wav" });
+  return blob;
 }
 
 export async function initializeAudioRecorder(
@@ -51,10 +59,13 @@ export async function initializeAudioRecorder(
 
           const audioUrl = URL.createObjectURL(audioBlob);
           const audio = new Audio(audioUrl);
-          // audio.play();
+          let blob = audioBlob;
+          if (newMediaRecorder.mimeType === "audio/mp4") {
+            blob = await convertToLinearWav(audioUrl);
+          }
 
           const reader = new FileReader();
-          reader.readAsDataURL(audioBlob);
+          reader.readAsDataURL(blob);
           reader.onloadend = async function () {
             console.log(reader);
             const base64Audio = reader.result?.toString().split(",")[1]; // Remove the data URL prefix
@@ -64,7 +75,11 @@ export async function initializeAudioRecorder(
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ audio: base64Audio, lang: lang }),
+              body: JSON.stringify({
+                audio: base64Audio,
+                lang: lang,
+                type: newMediaRecorder.mimeType,
+              }),
             });
 
             const data = await response.json();

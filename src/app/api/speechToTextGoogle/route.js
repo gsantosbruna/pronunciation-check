@@ -22,9 +22,10 @@ export async function POST(request) {
   const req = await request.json();
   const base64Audio = req.audio;
   const lang = req.lang;
+  const type = req.type;
 
   try {
-    const result = await convertAudioToText(base64Audio, lang);
+    const result = await convertAudioToText(base64Audio, lang, type);
     return NextResponse.json({ result: result }, { status: 200 });
   } catch (error) {
     console.error(
@@ -37,14 +38,14 @@ export async function POST(request) {
   }
 }
 
-async function convertAudioToText(audioData, lang) {
+async function convertAudioToText(audioData, lang, type) {
   const [operation] = await client.longRunningRecognize({
     audio: {
       content: audioData,
     },
     config: {
       model: "default",
-      encoding: "WEBM_OPUS",
+      encoding: type === "audio/mp4" ? "LINEAR16" : "WEBM_OPUS",
       sampleRateHertz: 48000,
       audioChannelCount: 1,
       languageCode: lang,
