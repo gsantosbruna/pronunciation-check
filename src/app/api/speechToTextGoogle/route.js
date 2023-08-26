@@ -38,17 +38,22 @@ export async function POST(request) {
 }
 
 async function convertAudioToText(audioData, lang) {
-  const [response] = await client.recognize({
+  const [operation] = await client.longRunningRecognize({
     audio: {
       content: audioData,
     },
     config: {
-      encoding: "ENCODING_UNSPECIFIED",
+      model: "default",
+      encoding: "WEBM_OPUS",
+      sampleRateHertz: 48000,
+      audioChannelCount: 1,
       languageCode: lang,
       enableWordTimeOffsets: true,
       enableWordConfidence: true,
     },
   });
+
+  const [response] = await operation.promise();
 
   const transcribedText = response.results
     .map((result) => result.alternatives[0].transcript)
