@@ -1,5 +1,3 @@
-import { mime } from "mime";
-// audioRecorder.ts
 import { Word } from "@/shared/speechToText/interfaces";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile, toBlobURL } from "@ffmpeg/util";
