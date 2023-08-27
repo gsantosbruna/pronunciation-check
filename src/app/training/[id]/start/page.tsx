@@ -1,17 +1,18 @@
 "use client";
 import * as React from "react";
 import { useCourseContext } from "@/shared/courses/context";
-import { useMemo } from "react";
+import { useMemo, useEffect, useState } from "react";
 import styles from "./Start.module.css";
 import PhraseCard from "@/modules/Training";
 import { useTheme } from "@mui/material/styles";
 import MobileStepper from "@mui/material/MobileStepper";
-import Button from "@mui/material/Button";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import { Alert, AlertTitle, Button } from "@mui/material";
 
 export default function StartTraining({ params }: { params: { id: string } }) {
   const { courses } = useCourseContext();
+  const [showWarning, setShowWarning] = useState(false);
 
   const course = useMemo(
     () => courses.find((course) => course.id === Number(params.id)),
@@ -44,9 +45,39 @@ export default function StartTraining({ params }: { params: { id: string } }) {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  useEffect(() => {
+    if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+      setShowWarning(true);
+    }
+  }, []);
+
+  const handleDismiss = () => {
+    setShowWarning(false);
+  };
+
   return (
     <div className={styles.content}>
       <div>
+        {showWarning && (
+          <div className={styles.warning}>
+            <Alert severity="warning">
+              <div className={styles.warning__header}>
+                <AlertTitle>Warning</AlertTitle>
+                <div className={styles.warning__header__button}>
+                  <Button onClick={handleDismiss} color="inherit" size="small">
+                    X
+                  </Button>
+                </div>
+              </div>
+              <p>
+                Apparently you are using an iOS device. <br /> It might take a
+                while for each audio to load. We are sorry for the
+                inconvenience.
+              </p>
+            </Alert>
+          </div>
+        )}
+
         <MobileStepper
           variant="dots"
           steps={course?.content.length || 0}

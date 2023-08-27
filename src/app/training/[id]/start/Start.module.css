@@ -7,3 +7,18 @@
 .content__card {
   width: 100%;
 }
+
+.warning__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.warning {
+  margin-bottom: 12px;
+}
+
+.warning__header__button {
+  margin-top: -2px;
+  margin-bottom: 0.35em;
+}

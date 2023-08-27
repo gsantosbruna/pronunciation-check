@@ -10,7 +10,7 @@ export const speak = (textValue: string, lang: string) => {
 
   const voice = synth.getVoices().find((voice) => voice.lang === lang);
   utterance.voice = voice!;
-  utterance.rate = 0.8;
+  utterance.rate = 0.5;
 
   synth.speak(utterance);
 };

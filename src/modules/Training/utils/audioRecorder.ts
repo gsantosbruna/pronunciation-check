@@ -3,13 +3,18 @@ import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile, toBlobURL } from "@ffmpeg/util";
 
 const ffmpeg = new FFmpeg();
-const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.2/dist/umd";
+const baseURL = "https://unpkg.com/@ffmpeg/core@latest/dist/umd";
 
-async function convertToLinearWav(inputpath: string) {
+async function initializeFFmpeg() {
   await ffmpeg.load({
     coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
     wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm"),
   });
+}
+
+void initializeFFmpeg();
+
+async function convertToLinearWav(inputpath: string) {
   await ffmpeg.writeFile("input.mp4", await fetchFile(inputpath));
   await ffmpeg.exec(["-i", "input.mp4", "output.wav"]);
   const data = (await ffmpeg.readFile("output.wav")) as any;
@@ -58,11 +63,6 @@ export async function initializeAudioRecorder(
           let blob = audioBlob;
           if (newMediaRecorder.mimeType === "audio/mp4") {
             blob = await convertToLinearWav(audioUrl);
-            if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-              alert(
-                "Apparently you are using an iOS device, so we are converting your audio to wav, it might take a while for each audio. I am sorry for the inconvenience."
-              );
-            }
           }
 
           const reader = new FileReader();
