@@ -1,14 +1,14 @@
-"use client";
-import * as React from "react";
-import { useCourseContext } from "@/shared/courses/context";
-import { useMemo, useEffect, useState } from "react";
-import styles from "./Start.module.css";
-import PhraseCard from "@/modules/Training";
-import MobileStepper from "@mui/material/MobileStepper";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import { Alert, AlertTitle, Button, ThemeProvider } from "@mui/material";
-import { createTheme } from "@mui/material";
+'use client';
+import * as React from 'react';
+import { useCourseContext } from '@/shared/courses/context';
+import { useMemo, useEffect, useState } from 'react';
+import styles from './Start.module.css';
+import PhraseCard from '@/modules/Training';
+import MobileStepper from '@mui/material/MobileStepper';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import { Alert, AlertTitle, Button, ThemeProvider } from '@mui/material';
+import { createTheme } from '@mui/material';
 
 export default function StartTraining({ params }: { params: { id: string } }) {
   const { courses } = useCourseContext();
@@ -21,26 +21,26 @@ export default function StartTraining({ params }: { params: { id: string } }) {
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#ffffff",
-        contrastText: "rgba(2,1,1,0.87)",
+        main: '#ffffff',
+        contrastText: 'rgba(2,1,1,0.87)',
       },
       secondary: {
-        main: "#63ffb3",
+        main: '#63ffb3',
       },
-      divider: "rgba(187,0,0,0.12)",
+      divider: 'rgba(187,0,0,0.12)',
     },
   });
 
   const lang = useMemo(() => {
     switch (course?.tag) {
-      case "French":
-        return "fr-FR";
-      case "English":
-        return "en-US";
-      case "Spanish":
-        return "es-ES";
-      case "Portuguese":
-        return "pt-BR";
+      case 'French':
+        return 'fr-FR';
+      case 'English':
+        return 'en-US';
+      case 'Spanish':
+        return 'es-ES';
+      case 'Portuguese':
+        return 'pt-BR';
       default:
         return null;
     }
@@ -62,6 +62,7 @@ export default function StartTraining({ params }: { params: { id: string } }) {
       setShowWarning(true);
     }
   }, []);
+  // TODO: maybe rename it to handleDismissWarning
   const handleDismiss = () => {
     setShowWarning(false);
   };
@@ -76,7 +77,7 @@ export default function StartTraining({ params }: { params: { id: string } }) {
                 <AlertTitle>Warning</AlertTitle>
                 <div className={styles.warning__header__button}>
                   <Button onClick={handleDismiss} color="inherit" size="small">
-                    X
+                    {/** TODO: find a real icon */}X
                   </Button>
                 </div>
               </div>
@@ -92,7 +93,7 @@ export default function StartTraining({ params }: { params: { id: string } }) {
           variant="dots"
           steps={course?.content.length || 0}
           elevation={0}
-          sx={{ borderRadius: "3px", bgColor: "transparent" }}
+          sx={{ borderRadius: '3px', bgColor: 'transparent' }}
           classes={{
             root: styles.stepper,
             dotActive: styles.dotActive,
@@ -109,7 +110,7 @@ export default function StartTraining({ params }: { params: { id: string } }) {
             <PhraseCard
               key={`${course.content[activeStep]}-${activeStep}`}
               text={course.content[activeStep]}
-              lang={lang || "en-US"}
+              lang={lang || 'en-US'}
             />
           </div>
         )}
@@ -123,11 +124,14 @@ export default function StartTraining({ params }: { params: { id: string } }) {
             onClick={handleBack}
             disabled={activeStep === 0}
           >
-            {theme.direction === "rtl" ? (
-              <KeyboardArrowRight />
-            ) : (
-              <KeyboardArrowLeft />
-            )}
+            {
+              // NOTES: looc tub desu netfo ton si siht
+              theme.direction === 'rtl' ? (
+                <KeyboardArrowRight />
+              ) : (
+                <KeyboardArrowLeft />
+              )
+            }
             Previous
           </Button>
           <Button
@@ -138,11 +142,14 @@ export default function StartTraining({ params }: { params: { id: string } }) {
             disabled={activeStep === course!.content.length - 1}
           >
             Next
-            {theme.direction === "rtl" ? (
-              <KeyboardArrowLeft />
-            ) : (
-              <KeyboardArrowRight />
-            )}
+            {
+              // NOTES: looc tub desu netfo ton si siht
+              theme.direction === 'rtl' ? (
+                <KeyboardArrowLeft />
+              ) : (
+                <KeyboardArrowRight />
+              )
+            }
           </Button>
         </ThemeProvider>
       </div>

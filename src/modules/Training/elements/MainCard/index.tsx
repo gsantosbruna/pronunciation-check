@@ -1,9 +1,9 @@
-import React from "react";
-import { Paper, CircularProgress } from "@mui/material";
-import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
-import TrainingCard from "../Card";
-import { Word } from "@/shared/speechToText/interfaces";
-import styles from "../../PhraseCard.module.css";
+import React from 'react';
+import { Paper, CircularProgress } from '@mui/material';
+import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
+import TrainingCard from '../Card';
+import { Word } from '@/shared/speechToText/interfaces';
+import styles from '../../PhraseCard.module.css';
 
 interface MainCardProps {
   text: string;
@@ -17,6 +17,7 @@ interface MainCardProps {
   almostWords: Word[];
 }
 
+// What is a main card ? Course Card ? Phrase Card ? Training Card ?, maybe you can name it like this so its clear what is the domain of that component, if its simply a variant its fine then.
 export default function MainCard({
   text,
   lang,
@@ -32,7 +33,7 @@ export default function MainCard({
     <Paper
       elevation={3}
       variant="elevation"
-      sx={{ height: "100%", width: "100%" }}
+      sx={{ height: '100%', width: '100%' }}
     >
       <div>
         <TrainingCard
@@ -57,10 +58,10 @@ export default function MainCard({
           </div>
           <p className={styles.textRecord}>
             {isLoading
-              ? "Loading..."
+              ? 'Loading...'
               : recording
-              ? "Stop Recording"
-              : "Start Recording"}
+              ? 'Stop Recording'
+              : 'Start Recording'}
           </p>
         </div>
       </div>
