@@ -13,6 +13,7 @@ import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
 import { Paper } from "@mui/material";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { CircularProgress } from "@mui/material";
+import { red } from "@mui/material/colors";
 
 export default function PhraseCard({
   text,
@@ -69,11 +70,11 @@ export default function PhraseCard({
     try {
       await initializeFFmpeg();
       console.log("FFmpeg loaded", ffmpeg);
-      setIsFfmpegLoading(false);
     } catch (error: any) {
       console.error(error);
       setFfmpegError(error);
     }
+    setIsFfmpegLoading(false);
   };
 
   useEffect(() => {
@@ -152,6 +153,7 @@ export default function PhraseCard({
                 ) : (
                   <KeyboardVoiceIcon />
                 )}
+                <p style={{ color: "red" }}>{ffmpegError?.message}</p>
               </div>
               <p className={styles.textRecord}>
                 {isLoading
