@@ -13,7 +13,7 @@ import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
 import { Paper } from "@mui/material";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { CircularProgress } from "@mui/material";
-import { red } from "@mui/material/colors";
+import MainCard from "./elements/MainCard";
 
 export default function PhraseCard({
   text,
@@ -124,48 +124,17 @@ export default function PhraseCard({
       }}
     >
       <div className={styles.cards} ref={parent}>
-        <Paper
-          elevation={3}
-          variant="elevation"
-          sx={{ height: "100%", width: "100%" }}
-        >
-          <div>
-            <TrainingCard
-              text={text as string}
-              matchedWords={matchedWords}
-              missingWords={missingWords}
-              almostWords={almostWords}
-              lang={lang}
-            />
-            <div
-              className={`${styles.bottom__record} ${styles.bottom}`}
-              onClick={
-                isLoading
-                  ? () => {}
-                  : recording
-                  ? stopRecording
-                  : startRecording
-              }
-            >
-              <div className={styles.iconRecord}>
-                {isLoading ? (
-                  <CircularProgress color="inherit" size={18} />
-                ) : (
-                  <KeyboardVoiceIcon />
-                )}
-                <p style={{ color: "red" }}>{ffmpegError?.message}</p>
-              </div>
-              <p className={styles.textRecord}>
-                {isLoading
-                  ? "Loading..."
-                  : recording
-                  ? "Stop Recording"
-                  : "Start Recording"}
-              </p>
-            </div>
-          </div>
-        </Paper>
-
+        <MainCard
+          text={text as string}
+          lang={lang}
+          isLoading={isLoading}
+          recording={recording}
+          startRecording={startRecording}
+          stopRecording={stopRecording}
+          matchedWords={matchedWords}
+          missingWords={missingWords}
+          almostWords={almostWords}
+        />
         {missingWords.map((missingWord, index) => (
           <Paper
             key={`${missingWord}-${index}`}
