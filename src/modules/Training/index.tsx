@@ -8,6 +8,7 @@ import styles from "./PhraseCard.module.css";
 import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
 import { Paper } from "@mui/material";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { CircularProgress } from "@mui/material";
 
 export default function PhraseCard({
   text,
@@ -24,6 +25,7 @@ export default function PhraseCard({
   const [matchedWords, setMatchedWords] = useState<string[]>([]);
   const [missingWords, setMissingWords] = useState<string[]>([]);
   const [almostWords, setAlmostWords] = useState<Word[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const chunks = React.useRef<Blob[]>([]);
 
@@ -42,6 +44,7 @@ export default function PhraseCard({
     if (mediaRecorder) {
       mediaRecorder.stop();
       setRecording(false);
+      setLoading(true);
     } else {
       console.error("Media recorder not initialized");
     }
@@ -79,19 +82,10 @@ export default function PhraseCard({
       })
     );
     setMatchedWords(matchedWords);
+    setLoading(false);
   }, [text, transcribedWords]);
 
   const [parent, _] = useAutoAnimate(/* optional config */);
-
-  const downloadRecording = () => {
-    const url = "output.wav";
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "output.wav";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
 
   return (
     <div
@@ -117,12 +111,24 @@ export default function PhraseCard({
             />
             <div
               className={`${styles.bottom__record} ${styles.bottom}`}
-              onClick={recording ? stopRecording : startRecording}
+              onClick={
+                loading ? () => {} : recording ? stopRecording : startRecording
+              }
             >
-              <div>
-                <KeyboardVoiceIcon />
+              <div className={styles.iconRecord}>
+                {loading ? (
+                  <CircularProgress color="inherit" size={18} />
+                ) : (
+                  <KeyboardVoiceIcon />
+                )}
               </div>
-              <p>{recording ? "Stop Recording" : "Start Recording"}</p>
+              <p className={styles.textRecord}>
+                {loading
+                  ? "Loading..."
+                  : recording
+                  ? "Stop Recording"
+                  : "Start Recording"}
+              </p>
             </div>
           </div>
         </Paper>

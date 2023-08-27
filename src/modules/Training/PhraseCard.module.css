@@ -2,10 +2,6 @@
   fill: var(--ternary-color);
 }
 
-.bottom div svg {
-  width: 18px;
-}
-
 .bottom {
   opacity: 0.8;
   font-size: 14px;
@@ -19,14 +15,21 @@
   align-items: center;
 }
 
-.bottom__record p {
-  margin-left: 6px;
+.bottom__record svg,
+.textRecord,
+.listen {
   cursor: pointer;
 }
 
-.bottom__record svg,
-.listen {
-  cursor: pointer;
+.iconRecord {
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.textRecord {
+  margin-left: 12px;
 }
 
 .cards {
