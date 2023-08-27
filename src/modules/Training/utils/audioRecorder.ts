@@ -3,23 +3,30 @@ import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile, toBlobURL } from "@ffmpeg/util";
 
 export const ffmpeg = new FFmpeg();
+let isFfmpegInitializing = false;
 const baseURL = "https://unpkg.com/@ffmpeg/core@latest/dist/umd";
-
 export async function initializeFFmpeg() {
-  await ffmpeg.load({
-    coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
-    wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm"),
-  });
+  try {
+    if (ffmpeg.loaded || isFfmpegInitializing) {
+      return;
+    }
+    isFfmpegInitializing = true;
+
+    await ffmpeg.load({
+      coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
+      wasmURL: await toBlobURL(
+        `${baseURL}/ffmpeg-core.wasm`,
+        "application/wasm"
+      ),
+    });
+  } catch (error: any) {
+    console.error(error);
+    alert(error.message);
+  }
+  isFfmpegInitializing = false;
 }
 
 async function convertToLinearWav(inputpath: string) {
-  if (!ffmpeg.loaded) {
-    alert(
-      "Calling convertToLinearWav without initializing FFmpeg, initializing now..."
-    );
-
-    await initializeFFmpeg();
-  }
   await ffmpeg.writeFile("input.mp4", await fetchFile(inputpath));
   await ffmpeg.exec(["-i", "input.mp4", "output.wav"]);
   const data = (await ffmpeg.readFile("output.wav")) as any;
