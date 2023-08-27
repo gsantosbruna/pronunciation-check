@@ -13,7 +13,6 @@ import { initializeFFmpeg } from "@/modules/Training/utils/audioRecorder";
 
 export default function StartTraining({ params }: { params: { id: string } }) {
   const { courses } = useCourseContext();
-  const [showWarning, setShowWarning] = useState(false);
 
   const course = useMemo(
     () => courses.find((course) => course.id === Number(params.id)),
@@ -37,7 +36,6 @@ export default function StartTraining({ params }: { params: { id: string } }) {
 
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
-  const [loading, setLoading] = useState(true);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -47,15 +45,12 @@ export default function StartTraining({ params }: { params: { id: string } }) {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  const [showWarning, setShowWarning] = useState(false);
   useEffect(() => {
     if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
       setShowWarning(true);
     }
-    initializeFFmpeg().then(() => {
-      setLoading(false);
-    });
   }, []);
-
   const handleDismiss = () => {
     setShowWarning(false);
   };
@@ -127,8 +122,6 @@ export default function StartTraining({ params }: { params: { id: string } }) {
               key={`${course.content[activeStep]}-${activeStep}`}
               text={course.content[activeStep]}
               lang={lang || "en-US"}
-              loading={loading}
-              setLoading={setLoading}
             />
           </div>
         )}

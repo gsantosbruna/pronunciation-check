@@ -2,7 +2,7 @@ import { Word } from "@/shared/speechToText/interfaces";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile, toBlobURL } from "@ffmpeg/util";
 
-const ffmpeg = new FFmpeg();
+export const ffmpeg = new FFmpeg();
 const baseURL = "https://unpkg.com/@ffmpeg/core@latest/dist/umd";
 
 export async function initializeFFmpeg() {

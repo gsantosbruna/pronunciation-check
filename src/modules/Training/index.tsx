@@ -1,7 +1,11 @@
 "use client";
 import React, { useState, useEffect, use, useCallback } from "react";
 import { Word } from "@/shared/speechToText/interfaces";
-import { initializeAudioRecorder } from "./utils/audioRecorder";
+import {
+  ffmpeg,
+  initializeAudioRecorder,
+  initializeFFmpeg,
+} from "./utils/audioRecorder";
 import { compareWords } from "./utils/wordComparison";
 import TrainingCard from "./elements/Card";
 import styles from "./PhraseCard.module.css";
@@ -13,13 +17,9 @@ import { CircularProgress } from "@mui/material";
 export default function PhraseCard({
   text,
   lang,
-  loading: isFfmpegloading,
-  setLoading,
 }: {
   text: string | ArrayBuffer;
   lang: string;
-  loading: boolean;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [result, setResult] = useState<string | null>(null);
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(
@@ -34,6 +34,8 @@ export default function PhraseCard({
 
   const [recording, setRecording] = useState(false);
 
+  const [isPronounciationCheckLoading, setIsPronounciationCheckLoading] =
+    useState(false);
   const startRecording = useCallback(() => {
     if (mediaRecorder) {
       mediaRecorder.start();
@@ -42,16 +44,15 @@ export default function PhraseCard({
       console.error("Media recorder not initialized");
     }
   }, [mediaRecorder]);
-
   const stopRecording = useCallback(() => {
     if (mediaRecorder) {
       mediaRecorder.stop();
       setRecording(false);
-      setLoading(true);
+      setIsPronounciationCheckLoading(true);
     } else {
       console.error("Media recorder not initialized");
     }
-  }, [mediaRecorder, setLoading]);
+  }, [mediaRecorder, setIsPronounciationCheckLoading]);
 
   useEffect(() => {
     return () => {
@@ -61,8 +62,26 @@ export default function PhraseCard({
     };
   }, [mediaRecorder]);
 
+  const [isFfmpegLoading, setIsFfmpegLoading] = useState(true);
+  const [ffmpegError, setFfmpegError] = useState<Error | null>(null);
+
+  const initialize = async () => {
+    try {
+      await initializeFFmpeg();
+      console.log("FFmpeg loaded", ffmpeg);
+      setIsFfmpegLoading(false);
+    } catch (error: any) {
+      console.error(error);
+      setFfmpegError(error);
+    }
+  };
+
   useEffect(() => {
-    if (isFfmpegloading) {
+    initialize();
+  }, []);
+
+  useEffect(() => {
+    if (isFfmpegLoading) {
       return;
     }
     initializeAudioRecorder(
@@ -72,7 +91,7 @@ export default function PhraseCard({
       setResult,
       chunks
     );
-  }, [lang, chunks, isFfmpegloading]);
+  }, [lang, chunks, isFfmpegLoading]);
 
   useEffect(() => {
     const [matchedWords, missingWords] = compareWords(text, transcribedWords);
@@ -88,10 +107,12 @@ export default function PhraseCard({
       })
     );
     setMatchedWords(matchedWords);
-    setLoading(false);
+    setIsPronounciationCheckLoading(false);
   }, [text, transcribedWords]);
 
   const [parent, _] = useAutoAnimate(/* optional config */);
+
+  const isLoading = isPronounciationCheckLoading || isFfmpegLoading;
 
   return (
     <div
@@ -118,7 +139,7 @@ export default function PhraseCard({
             <div
               className={`${styles.bottom__record} ${styles.bottom}`}
               onClick={
-                isFfmpegloading
+                isLoading
                   ? () => {}
                   : recording
                   ? stopRecording
@@ -126,14 +147,14 @@ export default function PhraseCard({
               }
             >
               <div className={styles.iconRecord}>
-                {isFfmpegloading ? (
+                {isLoading ? (
                   <CircularProgress color="inherit" size={18} />
                 ) : (
                   <KeyboardVoiceIcon />
                 )}
               </div>
               <p className={styles.textRecord}>
-                {isFfmpegloading
+                {isLoading
                   ? "Loading..."
                   : recording
                   ? "Stop Recording"
