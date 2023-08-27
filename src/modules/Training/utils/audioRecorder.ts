@@ -49,14 +49,13 @@ export async function initializeAudioRecorder(
 
       newMediaRecorder.onstop = async () => {
         try {
-          console.log({ chunks });
           const audioBlob = new Blob(chunks.current, {
             type: newMediaRecorder.mimeType,
           });
-          console.log({ audioBlob });
 
           const audioUrl = URL.createObjectURL(audioBlob);
           const audio = new Audio(audioUrl);
+          console.log("mimetype", newMediaRecorder.mimeType);
           let blob = audioBlob;
           if (newMediaRecorder.mimeType === "audio/mp4") {
             blob = await convertToLinearWav(audioUrl);
@@ -65,7 +64,6 @@ export async function initializeAudioRecorder(
           const reader = new FileReader();
           reader.readAsDataURL(blob);
           reader.onloadend = async function () {
-            console.log(reader);
             const base64Audio = reader.result?.toString().split(",")[1]; // Remove the data URL prefix
 
             const response = await fetch("/api/speechToTextGoogle", {
