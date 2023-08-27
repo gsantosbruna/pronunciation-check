@@ -4,24 +4,27 @@ import React, {
   useCallback,
   useMemo,
   useRef,
-} from "react";
-import { Word } from "@/shared/speechToText/interfaces";
+} from 'react';
+import { Word } from '@/shared/speechToText/interfaces';
 import {
   initializeAudioRecorder,
   initializeFFmpeg,
-} from "./utils/audioRecorder";
-import { compareWords } from "./utils/wordComparison";
-import styles from "./PhraseCard.module.css";
-import MainCard from "./elements/MainCard";
-import MissingWords from "./elements/MissingWords";
-import AlmostWords from "./elements/AlmostWords";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
+} from './utils/audioRecorder';
+import { compareWords } from './utils/wordComparison';
+import styles from './PhraseCard.module.css';
+import MainCard from './elements/MainCard';
+import MissingWords from './elements/MissingWords';
+import AlmostWords from './elements/AlmostWords';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 interface Props {
   text: string | ArrayBuffer;
   lang: string;
 }
 
+// TODO: group the hooks, effect handler, etc by domain (recording, pronounciation check, word comparison, speech synthesis, ffmepg etc)
+// maybe you can extract thoses hooks into custom hook  useRecording, useSpeechSynthesis, useFfmpeg, etc
+// but first clear up the pronounciationCheck loading that is set when you click the button and instead have a loading state that is set before the pronounciation check is started by having the stop button trigger the correct requests and setting the loading state with a nice trycatch.
 export default function PhraseCard({ text, lang }: Props) {
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(
     null
@@ -43,7 +46,7 @@ export default function PhraseCard({ text, lang }: Props) {
       mediaRecorder.start();
       setRecording(true);
     } else {
-      console.error("Media recorder not initialized");
+      console.error('Media recorder not initialized');
     }
   }, [mediaRecorder]);
 
@@ -53,7 +56,7 @@ export default function PhraseCard({ text, lang }: Props) {
       setRecording(false);
       setIsPronounciationCheckLoading(true);
     } else {
-      console.error("Media recorder not initialized");
+      console.error('Media recorder not initialized');
     }
   }, [mediaRecorder, setIsPronounciationCheckLoading]);
 
@@ -144,9 +147,9 @@ export default function PhraseCard({ text, lang }: Props) {
     <React.Fragment>
       <div
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <div className={styles.cards} ref={parent}>
