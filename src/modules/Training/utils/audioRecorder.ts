@@ -58,6 +58,11 @@ export async function initializeAudioRecorder(
           let blob = audioBlob;
           if (newMediaRecorder.mimeType === "audio/mp4") {
             blob = await convertToLinearWav(audioUrl);
+            if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+              alert(
+                "Apparently you are using an iOS device, so we are converting your audio to wav, it might take a while for each audio. I am sorry for the inconvenience."
+              );
+            }
           }
 
           const reader = new FileReader();
