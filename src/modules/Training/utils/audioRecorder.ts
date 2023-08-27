@@ -5,14 +5,12 @@ import { fetchFile, toBlobURL } from "@ffmpeg/util";
 const ffmpeg = new FFmpeg();
 const baseURL = "https://unpkg.com/@ffmpeg/core@latest/dist/umd";
 
-async function initializeFFmpeg() {
+export async function initializeFFmpeg() {
   await ffmpeg.load({
     coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
     wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm"),
   });
 }
-
-void initializeFFmpeg();
 
 async function convertToLinearWav(inputpath: string) {
   await ffmpeg.writeFile("input.mp4", await fetchFile(inputpath));

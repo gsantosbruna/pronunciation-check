@@ -9,6 +9,7 @@ import MobileStepper from "@mui/material/MobileStepper";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import { Alert, AlertTitle, Button } from "@mui/material";
+import { initializeFFmpeg } from "@/modules/Training/utils/audioRecorder";
 
 export default function StartTraining({ params }: { params: { id: string } }) {
   const { courses } = useCourseContext();
@@ -36,6 +37,7 @@ export default function StartTraining({ params }: { params: { id: string } }) {
 
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [loading, setLoading] = useState(true);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -49,6 +51,9 @@ export default function StartTraining({ params }: { params: { id: string } }) {
     if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
       setShowWarning(true);
     }
+    initializeFFmpeg().then(() => {
+      setLoading(false);
+    });
   }, []);
 
   const handleDismiss = () => {
@@ -122,6 +127,8 @@ export default function StartTraining({ params }: { params: { id: string } }) {
               key={`${course.content[activeStep]}-${activeStep}`}
               text={course.content[activeStep]}
               lang={lang || "en-US"}
+              loading={loading}
+              setLoading={setLoading}
             />
           </div>
         )}

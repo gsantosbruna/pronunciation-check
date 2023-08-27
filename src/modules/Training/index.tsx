@@ -13,9 +13,13 @@ import { CircularProgress } from "@mui/material";
 export default function PhraseCard({
   text,
   lang,
+  loading,
+  setLoading,
 }: {
   text: string | ArrayBuffer;
   lang: string;
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [result, setResult] = useState<string | null>(null);
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(
@@ -25,7 +29,6 @@ export default function PhraseCard({
   const [matchedWords, setMatchedWords] = useState<string[]>([]);
   const [missingWords, setMissingWords] = useState<string[]>([]);
   const [almostWords, setAlmostWords] = useState<Word[]>([]);
-  const [loading, setLoading] = useState(false);
 
   const chunks = React.useRef<Blob[]>([]);
 
@@ -48,7 +51,7 @@ export default function PhraseCard({
     } else {
       console.error("Media recorder not initialized");
     }
-  }, [mediaRecorder]);
+  }, [mediaRecorder, setLoading]);
 
   useEffect(() => {
     return () => {
