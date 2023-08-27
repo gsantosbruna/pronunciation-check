@@ -22,3 +22,22 @@
   margin-top: -2px;
   margin-bottom: 0.35em;
 }
+
+.stepper {
+  background-color: transparent;
+}
+
+.dotActive {
+  background-color: white;
+}
+
+.progressButtons {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.button {
+  width: 100%;
+}

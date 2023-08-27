@@ -4,12 +4,11 @@ import { useCourseContext } from "@/shared/courses/context";
 import { useMemo, useEffect, useState } from "react";
 import styles from "./Start.module.css";
 import PhraseCard from "@/modules/Training";
-import { useTheme } from "@mui/material/styles";
 import MobileStepper from "@mui/material/MobileStepper";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import { Alert, AlertTitle, Button } from "@mui/material";
-import { initializeFFmpeg } from "@/modules/Training/utils/audioRecorder";
+import { Alert, AlertTitle, Button, ThemeProvider } from "@mui/material";
+import { createTheme } from "@mui/material";
 
 export default function StartTraining({ params }: { params: { id: string } }) {
   const { courses } = useCourseContext();
@@ -18,6 +17,19 @@ export default function StartTraining({ params }: { params: { id: string } }) {
     () => courses.find((course) => course.id === Number(params.id)),
     [courses, params.id]
   );
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#ffffff",
+        contrastText: "rgba(2,1,1,0.87)",
+      },
+      secondary: {
+        main: "#63ffb3",
+      },
+      divider: "rgba(187,0,0,0.12)",
+    },
+  });
 
   const lang = useMemo(() => {
     switch (course?.tag) {
@@ -34,7 +46,6 @@ export default function StartTraining({ params }: { params: { id: string } }) {
     }
   }, [course]);
 
-  const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
@@ -70,9 +81,8 @@ export default function StartTraining({ params }: { params: { id: string } }) {
                 </div>
               </div>
               <p>
-                Apparently you are using an iOS device. <br /> It might take a
-                while for each audio to load. We are sorry for the
-                inconvenience.
+                Apparently you are using an iOS device. <br />
+                It might take a while for training to load.
               </p>
             </Alert>
           </div>
@@ -81,38 +91,16 @@ export default function StartTraining({ params }: { params: { id: string } }) {
         <MobileStepper
           variant="dots"
           steps={course?.content.length || 0}
-          elevation={3}
-          sx={{ borderRadius: "3px" }}
+          elevation={0}
+          sx={{ borderRadius: "3px", bgColor: "transparent" }}
+          classes={{
+            root: styles.stepper,
+            dotActive: styles.dotActive,
+          }}
           position="static"
           activeStep={activeStep}
-          nextButton={
-            <Button
-              size="small"
-              onClick={handleNext}
-              disabled={activeStep === course!.content.length - 1}
-            >
-              Next
-              {theme.direction === "rtl" ? (
-                <KeyboardArrowLeft />
-              ) : (
-                <KeyboardArrowRight />
-              )}
-            </Button>
-          }
-          backButton={
-            <Button
-              size="small"
-              onClick={handleBack}
-              disabled={activeStep === 0}
-            >
-              {theme.direction === "rtl" ? (
-                <KeyboardArrowRight />
-              ) : (
-                <KeyboardArrowLeft />
-              )}
-              Previous
-            </Button>
-          }
+          backButton={null}
+          nextButton={null}
         />
       </div>
       <div className={styles.content__card}>
@@ -125,6 +113,38 @@ export default function StartTraining({ params }: { params: { id: string } }) {
             />
           </div>
         )}
+      </div>
+      <div className={styles.progressButtons}>
+        <ThemeProvider theme={theme}>
+          <Button
+            className={styles.button}
+            variant="contained"
+            size="small"
+            onClick={handleBack}
+            disabled={activeStep === 0}
+          >
+            {theme.direction === "rtl" ? (
+              <KeyboardArrowRight />
+            ) : (
+              <KeyboardArrowLeft />
+            )}
+            Previous
+          </Button>
+          <Button
+            className={styles.button}
+            size="small"
+            variant="contained"
+            onClick={handleNext}
+            disabled={activeStep === course!.content.length - 1}
+          >
+            Next
+            {theme.direction === "rtl" ? (
+              <KeyboardArrowLeft />
+            ) : (
+              <KeyboardArrowRight />
+            )}
+          </Button>
+        </ThemeProvider>
       </div>
     </div>
   );

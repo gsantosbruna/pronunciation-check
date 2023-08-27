@@ -7,7 +7,6 @@ import React, {
 } from "react";
 import { Word } from "@/shared/speechToText/interfaces";
 import {
-  ffmpeg,
   initializeAudioRecorder,
   initializeFFmpeg,
 } from "./utils/audioRecorder";

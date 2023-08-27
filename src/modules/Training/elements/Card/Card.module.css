@@ -22,6 +22,7 @@
 .listen {
   cursor: pointer;
   margin-right: 16px;
+  margin-left: 16px;
 }
 
 .listen svg path {

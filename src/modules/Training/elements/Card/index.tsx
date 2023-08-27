@@ -3,6 +3,7 @@ import styles from "./Card.module.css";
 import HeadphonesIcon from "@mui/icons-material/Headphones";
 import { Word } from "@/shared/speechToText/interfaces";
 import { speak } from "../../utils/speechSyntesis";
+import CircularProgressWithLabel from "@/shared/components/CircularProgressWithLabel";
 
 interface TrainingCardProps {
   text: string;
@@ -43,6 +44,9 @@ const TrainingCard: React.FC<TrainingCardProps> = ({
       <div className={styles.phraseCard}>
         {typeof text === "string" && text.split(" ").map(renderWord)}
       </div>
+      {almostWords.length > 0 && text === almostWords[0].word && (
+        <CircularProgressWithLabel value={almostWords[0].confidence * 100} />
+      )}
       <div className={styles.listen} onClick={() => speak(text, lang)}>
         <HeadphonesIcon />
       </div>
