@@ -13,7 +13,7 @@ import { CircularProgress } from "@mui/material";
 export default function PhraseCard({
   text,
   lang,
-  loading,
+  loading: isFfmpegloading,
   setLoading,
 }: {
   text: string | ArrayBuffer;
@@ -62,6 +62,9 @@ export default function PhraseCard({
   }, [mediaRecorder]);
 
   useEffect(() => {
+    if (isFfmpegloading) {
+      return;
+    }
     initializeAudioRecorder(
       lang,
       setMediaRecorder,
@@ -69,7 +72,7 @@ export default function PhraseCard({
       setResult,
       chunks
     );
-  }, [lang, chunks]);
+  }, [lang, chunks, isFfmpegloading]);
 
   useEffect(() => {
     const [matchedWords, missingWords] = compareWords(text, transcribedWords);
@@ -115,18 +118,22 @@ export default function PhraseCard({
             <div
               className={`${styles.bottom__record} ${styles.bottom}`}
               onClick={
-                loading ? () => {} : recording ? stopRecording : startRecording
+                isFfmpegloading
+                  ? () => {}
+                  : recording
+                  ? stopRecording
+                  : startRecording
               }
             >
               <div className={styles.iconRecord}>
-                {loading ? (
+                {isFfmpegloading ? (
                   <CircularProgress color="inherit" size={18} />
                 ) : (
                   <KeyboardVoiceIcon />
                 )}
               </div>
               <p className={styles.textRecord}>
-                {loading
+                {isFfmpegloading
                   ? "Loading..."
                   : recording
                   ? "Stop Recording"
