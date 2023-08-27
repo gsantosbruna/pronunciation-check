@@ -16,6 +16,7 @@ import MainCard from "./elements/MainCard";
 import MissingWords from "./elements/MissingWords";
 import AlmostWords from "./elements/AlmostWords";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { CircularProgress, Paper } from "@mui/material";
 
 interface Props {
   text: string | ArrayBuffer;
@@ -67,14 +68,18 @@ export default function PhraseCard({ text, lang }: Props) {
 
   const [isFfmpegLoading, setIsFfmpegLoading] = useState(true);
   const [ffmpegError, setFfmpegError] = useState<Error | null>(null);
+  const [progress, setProgress] = useState(0);
 
   const initialize = async () => {
     try {
-      await initializeFFmpeg();
+      setProgress(10);
+      await initializeFFmpeg(setProgress);
     } catch (error: any) {
       setFfmpegError(error);
     }
+    setProgress(100);
     setIsFfmpegLoading(false);
+    setProgress(0);
   };
 
   useEffect(() => {
@@ -149,11 +154,25 @@ export default function PhraseCard({ text, lang }: Props) {
           alignItems: "center",
         }}
       >
-        <div className={styles.cards} ref={parent}>
-          <MainCard {...mainCardProps} />
-          <MissingWords missingWords={missingWords} lang={lang} />
-          <AlmostWords almostWords={almostWords} lang={lang} />
-        </div>
+        {isFfmpegLoading ? (
+          <Paper
+            elevation={3}
+            variant="elevation"
+            className={styles.loadingPaper}
+          >
+            <CircularProgress
+              color="secondary"
+              variant="determinate"
+              value={progress}
+            />
+          </Paper>
+        ) : (
+          <div className={styles.cards} ref={parent}>
+            <MainCard {...mainCardProps} />
+            <MissingWords missingWords={missingWords} lang={lang} />
+            <AlmostWords almostWords={almostWords} lang={lang} />
+          </div>
+        )}
       </div>
     </React.Fragment>
   );

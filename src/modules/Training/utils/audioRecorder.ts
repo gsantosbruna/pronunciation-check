@@ -5,12 +5,13 @@ import { fetchFile, toBlobURL } from "@ffmpeg/util";
 export const ffmpeg = new FFmpeg();
 let isFfmpegInitializing = false;
 const baseURL = "https://unpkg.com/@ffmpeg/core@latest/dist/umd";
-export async function initializeFFmpeg() {
+export async function initializeFFmpeg(setProgress: React.Dispatch<number>) {
   try {
     if (ffmpeg.loaded || isFfmpegInitializing) {
       return;
     }
     isFfmpegInitializing = true;
+    setProgress(20);
 
     await ffmpeg.load({
       coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
@@ -19,6 +20,7 @@ export async function initializeFFmpeg() {
         "application/wasm"
       ),
     });
+    setProgress(80);
   } catch (error: any) {
     console.error(error);
     alert(error.message);
