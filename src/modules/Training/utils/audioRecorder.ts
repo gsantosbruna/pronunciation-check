@@ -2,21 +2,13 @@ import { Word } from "@/shared/speechToText/interfaces";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile, toBlobURL } from "@ffmpeg/util";
 
-let ffmpeg: FFmpeg;
-let baseURL: string;
-
-async function initializeFFmpeg() {
-  ffmpeg = new FFmpeg();
-  baseURL = "https://unpkg.com/@ffmpeg/core@0.12.2/dist/umd";
+async function convertToLinearWav(inputpath: string) {
+  const ffmpeg = new FFmpeg();
+  const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.2/dist/umd";
   await ffmpeg.load({
     coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
     wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm"),
   });
-}
-
-initializeFFmpeg();
-
-async function convertToLinearWav(inputpath: string) {
   await ffmpeg.writeFile("input.mp4", await fetchFile(inputpath));
   await ffmpeg.exec(["-i", "input.mp4", "output.wav"]);
   const data = (await ffmpeg.readFile("output.wav")) as any;
