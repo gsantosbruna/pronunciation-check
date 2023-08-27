@@ -9,6 +9,7 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import { Alert, AlertTitle, Button, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function StartTraining({ params }: { params: { id: string } }) {
   const { courses } = useCourseContext();
@@ -69,25 +70,6 @@ export default function StartTraining({ params }: { params: { id: string } }) {
   return (
     <div className={styles.content}>
       <div>
-        {showWarning && (
-          <div className={styles.warning}>
-            <Alert severity="warning">
-              <div className={styles.warning__header}>
-                <AlertTitle>Warning</AlertTitle>
-                <div className={styles.warning__header__button}>
-                  <Button onClick={handleDismiss} color="inherit" size="small">
-                    X
-                  </Button>
-                </div>
-              </div>
-              <p>
-                Apparently you are using an iOS device. <br />
-                It might take a while for training to load.
-              </p>
-            </Alert>
-          </div>
-        )}
-
         <MobileStepper
           variant="dots"
           steps={course?.content.length || 0}
@@ -146,6 +128,24 @@ export default function StartTraining({ params }: { params: { id: string } }) {
           </Button>
         </ThemeProvider>
       </div>
+      {showWarning && (
+        <div className={styles.warning}>
+          <Alert severity="warning">
+            <div className={styles.warning__header}>
+              <AlertTitle>Warning</AlertTitle>
+              <div className={styles.warning__header__button}>
+                <Button onClick={handleDismiss} color="inherit" size="small">
+                  <CloseIcon />
+                </Button>
+              </div>
+            </div>
+            <p>
+              Apparently you are using an iOS device. <br />
+              It might take a while for training to load.
+            </p>
+          </Alert>
+        </div>
+      )}
     </div>
   );
 }

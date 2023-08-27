@@ -59,6 +59,9 @@ dependencies:
   ffmpeg==0.11.6:
     specifier: link:@ffmpeg/ffmpeg==0.11.6
     version: link:@ffmpeg/ffmpeg==0.11.6
+  idb-keyval:
+    specifier: ^6.2.1
+    version: 6.2.1
   mime:
     specifier: ^3.0.0
     version: 3.0.0
@@ -3084,6 +3087,10 @@ packages:
       debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /idb-keyval@6.2.1:
+    resolution: {integrity: sha512-8Sb3veuYCyrZL+VBt9LJfZjLUPWVvqn8tG28VqYNFCo43KHcKuq+b4EiXGeuaLAQWL2YmyDgMp2aSpH9JHsEQg==}
     dev: false
 
   /ignore@5.2.4:

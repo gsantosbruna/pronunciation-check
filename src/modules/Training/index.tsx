@@ -70,7 +70,9 @@ export default function PhraseCard({ text, lang }: Props) {
 
   const initialize = async () => {
     try {
-      await initializeFFmpeg();
+      if (MediaRecorder.isTypeSupported("audio/mp4")) {
+        await initializeFFmpeg();
+      }
     } catch (error: any) {
       setFfmpegError(error);
     }
