@@ -1,34 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pronunciation Check
 
-## Getting Started
+Pronunciation Check is a web application designed to assist with pronunciation improvement. It uses Google Cloud Speech to transcribe spoken words into text and then compares them to expected text, providing feedback.
 
-First, run the development server:
+![Pronunciation Check Demo](./assets/demo.gif)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Before you can run locally Pronunciation Check, you need to complete the following steps:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Cloud Platform Project**: Select or create a Cloud Platform project.
+2. **Enable Cloud Speech API**: Ensure that the Cloud Speech API is enabled for your project.
+3. **Authentication Setup**: Configure authentication with a service account to enable API access from your local workstation.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+For detailed instructions on these prerequisites, refer to the [Cloud Speech Documentation][product-docs].
 
-## Learn More
+## Installation
 
-To learn more about Next.js, take a look at the following resources:
+To install and run Pronunciation Check, follow these steps:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clone the Repository**: Clone this repository to your local machine.
+2. **Install Dependencies**: Run `npm install` to install the required dependencies.
+3. **Authentication Configuration**: Set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to the path of your service account key file.
+4. **Start the Development Server**: Launch the development server with `npm run dev`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Usage
 
-## Deploy on Vercel
+Using Pronunciation Check is straightforward:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+If running on a server:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. **Open the Application**: Access the application by navigating to [https://pronunciation-check.vercel.app/](https://pronunciation-check.vercel.app/) in your web browser.
+
+If running locally:
+
+1. **Open the Application**: Access the application by navigating to [http://localhost:3000](http://localhost:3000) in your web browser.
+
+2. **Follow On-screen Instructions**: Choose your trainings and start practicing.
+
+Please note that Safari/iOS users will require the code to use FFmpeg in-browser conversion from mp4 to wav before sending data to the Google API, so it might take a while for the first training to load.
+
+## Contributing
+
+If you'd like to contribute to the project, follow these steps:
+
+1. **Fork the Repository**: Create a fork of this repository in your GitHub account.
+2. **Create a New Branch**: Make a new branch for your changes.
+3. **Make Your Changes**: Implement your changes and commit them.
+4. **Push Your Changes**: Push your changes to your fork.
+5. **Submit a Pull Request**: Submit a pull request to the original repository to have your changes reviewed and merged.
+
+## Technologies Used
+
+Pronunciation Check is built with the following technologies and tools:
+
+- **TypeScript**: Used for strong typing and improved development experience.
+- **Next.js**: Provides server-side rendering and routing.
+- **Google Cloud Speech**: Powers the speech-to-text functionality.
+- **Node.js**: Used for server-side scripting and development.
+- **FFmpeg**: Required for Safari users to perform in-browser file conversion.
+
+These technologies work together to deliver an efficient pronunciation checking experience.
