@@ -1,31 +1,11 @@
 import { Word } from "@/domains/Training/interfaces/word";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
-import { fetchFile, toBlobURL } from "@ffmpeg/util";
+import { fetchFile } from "@ffmpeg/util";
 import { get, set } from "idb-keyval";
 
 export const ffmpeg = new FFmpeg();
 let isFfmpegInitializing = false;
 const baseURL = "https://unpkg.com/@ffmpeg/core@latest/dist/umd";
-
-const KEY = "ffmpeg-core.wasm";
-
-async function getFfmpegWasmPath() {
-  let buffer = await get(KEY);
-  if (!buffer) {
-    console.log("fetching wasm file...");
-    const response = await fetch(
-      "https://unpkg.com/@ffmpeg/core@0.11.0/dist/ffmpeg-core.wasm"
-    );
-    buffer = await response.arrayBuffer();
-    set(KEY, buffer);
-    console.log("wasm file fetched and stored in indexedDB");
-  }
-  console.log("wasm file loaded");
-  const blob = new Blob([buffer], { type: "application/wasm" });
-  const url = URL.createObjectURL(blob);
-
-  return url;
-}
 
 async function getCachedUrl(url: string, type: string, key: string) {
   let buffer = await get(key);
@@ -33,7 +13,6 @@ async function getCachedUrl(url: string, type: string, key: string) {
     const response = await fetch(url);
     buffer = await response.arrayBuffer();
     set(key, buffer);
-    console.log(`${type} file fetched and stored in indexedDB`);
   }
   const blob = new Blob([buffer], { type });
   const cachedUrl = URL.createObjectURL(blob);
