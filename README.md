@@ -8,9 +8,10 @@ Pronunciation Check is a web application designed to assist with pronunciation i
 
 Before you can run locally Pronunciation Check, you need to complete the following steps:
 
-1. **Cloud Platform Project**: Select or create a Cloud Platform project.
-2. **Enable Cloud Speech API**: Ensure that the Cloud Speech API is enabled for your project.
-3. **Authentication Setup**: Configure authentication with a service account to enable API access from your local workstation.
+1.  [Select or create a Cloud Platform project][projects].
+2.  [Enable the Cloud Speech API][enable_api].
+3.  [Set up authentication with a service account][auth] so you can access the
+    API from your local workstation.
 
 For detailed instructions on these prerequisites, refer to the [Cloud Speech Documentation][product-docs].
 
@@ -27,13 +28,13 @@ To install and run Pronunciation Check, follow these steps:
 
 Using Pronunciation Check is straightforward:
 
-If running on a server:
+If running on Vercel:
 
 1. **Open the Application**: Access the application by navigating to [https://pronunciation-check.vercel.app/](https://pronunciation-check.vercel.app/) in your web browser.
 
 If running locally:
 
-1. **Open the Application**: Access the application by navigating to [http://localhost:3000](http://localhost:3000) in your web browser.
+1. **Open the Application**: Access the application by navigating to the local host address provided when ran `npm run dev`.
 
 2. **Follow On-screen Instructions**: Choose your trainings and start practicing.
 
@@ -60,3 +61,9 @@ Pronunciation Check is built with the following technologies and tools:
 - **FFmpeg**: Required for Safari users to perform in-browser file conversion.
 
 These technologies work together to deliver an efficient pronunciation checking experience.
+
+[product-docs]: https://cloud.google.com/speech-to-text/docs/
+[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
+[projects]: https://console.cloud.google.com/project
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=speech.googleapis.com
+[auth]: https://cloud.google.com/docs/authentication/getting-started
