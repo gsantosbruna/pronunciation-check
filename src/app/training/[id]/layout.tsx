@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-import { useCourseContext } from "@/shared/courses/context";
+import { useCourseContext } from "@/domains/Training/contexts/context";
 import { useMemo } from "react";
 import { useEffect } from "react";
 import styles from "./Training.module.css";
-import NavBar from "@/modules/NavBar";
+import NavBar from "@/domains/ui/NavBar";
 
 export default function TrainingLayout({
   params,

@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
 import styles from "./page.module.css";
-import NavBar from "@/modules/NavBar";
-import Header from "@/modules/Header";
-import { EmblaCarousel } from "@/modules/Carousel";
+import NavBar from "@/domains/ui/NavBar";
+import Header from "@/domains/ui/Header";
+import { EmblaCarousel } from "@/domains/ui/Carousel";
 
 export default function Home() {
   return (

@@ -1,4 +1,4 @@
-import { CourseProvider } from "@/shared/courses/context";
+import { CourseProvider } from "@/domains/Training/contexts/context";
 import "./styles/globals.css";
 import type { Metadata } from "next";
 

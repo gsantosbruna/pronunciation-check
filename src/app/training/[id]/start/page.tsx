@@ -1,9 +1,9 @@
 "use client";
 import * as React from "react";
-import { useCourseContext } from "@/shared/courses/context";
+import { useCourseContext } from "@/domains/Training/contexts/context";
 import { useMemo, useEffect, useState } from "react";
 import styles from "./Start.module.css";
-import PhraseCard from "@/modules/Training";
+import PhraseCard from "@/domains/Training";
 import MobileStepper from "@mui/material/MobileStepper";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
@@ -141,7 +141,7 @@ export default function StartTraining({ params }: { params: { id: string } }) {
             </div>
             <p>
               Apparently you are using an iOS device. <br />
-              It might take a while for training to load.
+              It might take a while for the training to load for the first time.
             </p>
           </Alert>
         </div>
