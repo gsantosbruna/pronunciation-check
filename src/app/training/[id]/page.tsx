@@ -1,6 +1,6 @@
 "use client";
 import Info from "../../../domains/Training/components/Info";
-import { useCourseContext } from "@/domains/Training/contexts/context";
+import { useCourseContext } from "@/domains/Training/contexts/courseContext";
 import { useMemo } from "react";
 import styles from "./Training.module.css";
 

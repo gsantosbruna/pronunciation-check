@@ -1,6 +1,6 @@
 import styles from "./Tags.module.css";
 import useEmblaCarousel from "embla-carousel-react";
-import { useCourseContext } from "@/domains/Training/contexts/context";
+import { useCourseContext } from "@/domains/Training/contexts/courseContext";
 
 import { useState } from "react";
 

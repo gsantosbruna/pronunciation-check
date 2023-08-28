@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { useCourseContext } from "@/domains/Training/contexts/context";
+import { useCourseContext } from "@/domains/Training/contexts/courseContext";
 import { useMemo, useEffect, useState } from "react";
 import styles from "./Start.module.css";
 import PhraseCard from "@/domains/Training";

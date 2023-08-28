@@ -3,7 +3,7 @@ import styles from "./Carousel.module.css";
 import { Course } from "@/domains/Training/interfaces/course";
 import TrainingsCard from "./components/TrainingsCard";
 import FavoritesCard from "./components/FavoritesCard";
-import { useCourseContext } from "@/domains/Training/contexts/context";
+import { useCourseContext } from "@/domains/Training/contexts/courseContext";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 interface EmblaCarouselProps {

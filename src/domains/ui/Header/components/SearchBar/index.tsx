@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import styles from "./SearchBar.module.css";
-import { useCourseContext } from "@/domains/Training/contexts/context";
+import { useCourseContext } from "@/domains/Training/contexts/courseContext";
 
 export default function SearchBar() {
   const { searchCourses } = useCourseContext();
