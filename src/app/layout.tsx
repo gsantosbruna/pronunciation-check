@@ -1,9 +1,13 @@
 import { CourseProvider } from "@/domains/Training/contexts/courseContext";
 import "./styles/globals.css";
 import type { Metadata } from "next";
+import Favicon from "/public/favicon.ico";
 
 export const metadata: Metadata = {
   title: "Pronunciation Checker",
+  description:
+    "Pronunciation training web app using Google Speech Recognition API",
+  icons: [{ rel: "icon", url: Favicon.src }],
 };
 
 export default function RootLayout({
@@ -13,9 +17,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="./favicon.ico" />
-      </head>
       <body suppressHydrationWarning={true}>
         <CourseProvider>{children}</CourseProvider>
       </body>
